@@ -1,0 +1,30 @@
+@model IEnumerable<ExpenseTracker.Models.Expense>
+
+<h1>Expense List</h1>
+<a asp-action="Create" class="btn btn-primary">Add New Expense</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Category</td>
+                <td>@item.Amount.ToString("C")</td>
+                <td>@item.Date.ToShortDateString()</td>
+                <td>@item.Description</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
