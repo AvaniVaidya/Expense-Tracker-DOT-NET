@@ -1,0 +1,40 @@
+@using Newtonsoft.Json
+
+@{
+    ViewData["Title"] = "Monthly Spending";
+    var months = ViewBag.Months as List<string>;
+    var totals = ViewBag.Totals as List<decimal>;
+}
+
+<h2>Monthly Spending</h2>
+
+<canvas id="spendingChart" width="400" height="200"></canvas>
+
+<script>
+    // Get data from ViewBag
+    const months = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(months));
+    const totals = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(totals));
+
+    // Create the chart
+    const ctx = document.getElementById('spendingChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar', // Use 'bar' or 'line' for line chart
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Total Spending',
+                data: totals,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Bar colors
+                borderColor: 'rgba(54, 162, 235, 1)', // Bar border colors
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

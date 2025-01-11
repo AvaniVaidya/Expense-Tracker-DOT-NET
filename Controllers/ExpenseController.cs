@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace ExpenseTracker.Controllers;
 
@@ -35,7 +36,7 @@ public class ExpenseController : Controller {
     // POST: Expense/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Category,Amount,Date,Description")] Expense expense)
+    public async Task<IActionResult> Create([Bind("CategoryEnum,Amount,Date,Description")] Expense expense)
     {
         //if (ModelState.IsValid)
         {
@@ -69,7 +70,7 @@ public class ExpenseController : Controller {
     // POST: Expense/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Category,Amount,Date,Description")] Expense expense)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,CategoryEnum,Amount,Date,Description")] Expense expense)
     {
         if (id != expense.Id) return NotFound();
 
@@ -124,6 +125,27 @@ public class ExpenseController : Controller {
     private bool ExpenseExists(int id)
     {
         return _context.Expenses.Any(e => e.Id == id);
+    }
+
+    public IActionResult MonthlySpending()
+    {
+        // Group expenses by month and calculate total spending
+        var monthlySpending = _context.Expenses
+            .GroupBy(e => new { Month = e.Date.Month })
+            .Select(g => new
+            {
+                Month = g.Key.Month,
+                Total = g.Sum(e => e.Amount)
+            })
+            .OrderBy(m => m.Month)
+            .ToList();
+
+        // Pass data to the view
+        ViewBag.Months = monthlySpending.Select(m => new DateTime(1, m.Month, 1).ToString("MMMM")).ToList();
+        ViewBag.Totals = monthlySpending.Select(m => m.Total).ToList();
+
+
+        return View();
     }
 
 }

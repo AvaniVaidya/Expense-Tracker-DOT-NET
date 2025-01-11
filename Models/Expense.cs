@@ -1,7 +1,19 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseTracker.Models;
+
+public enum ExpenseCategory
+{
+    Food,
+    Transport,
+    Rent,
+    Entertainment,
+    Utilities,
+    Healthcare,
+    Miscellaneous
+}
 
 public class Expense {
 
@@ -10,8 +22,14 @@ public class Expense {
     [Required]
     public string UserId { get; set; } // To associate expenses with a user
 
+    [NotMapped]
+    public ExpenseCategory CategoryEnum
+    {
+        get => Enum.TryParse(Category, out ExpenseCategory result) ? result : ExpenseCategory.Miscellaneous;
+        set => Category = value.ToString();
+    }
+
     [Required]
-    [StringLength(50)]
     public string Category { get; set; }
 
     [Required]
