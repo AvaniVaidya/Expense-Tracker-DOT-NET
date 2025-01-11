@@ -1,4 +1,3 @@
-
 # Expense Tracker Application
 
 This project is an ASP.NET Core application that includes the following features:
@@ -12,11 +11,13 @@ This project is an ASP.NET Core application that includes the following features
 ## **Features Implemented**
 
 ### **1. Login/Logout System**
+
 - Users can register, log in, and log out securely.
 - The application uses ASP.NET Core Identity for user authentication.
 - Registered users can manage their own expenses.
 
 #### **Endpoints**
+
 - `/Account/Register`: User registration.
 - `/Account/Login`: User login.
 - `/Account/Logout`: User logout.
@@ -24,6 +25,7 @@ This project is an ASP.NET Core application that includes the following features
 ---
 
 ### **2. CRUD Operations for Expenses**
+
 - Allows users to add, edit, view, and delete expenses.
 - Each expense includes the following details:
   - **Category**
@@ -32,6 +34,7 @@ This project is an ASP.NET Core application that includes the following features
   - **Description**
 
 #### **Endpoints**
+
 - `/Expense/Index`: View all expenses.
 - `/Expense/Create`: Add a new expense.
 - `/Expense/Edit/{id}`: Edit an existing expense.
@@ -40,11 +43,13 @@ This project is an ASP.NET Core application that includes the following features
 ---
 
 ### **3. Monthly Spending Visualization**
+
 - Visualizes monthly spending data using Chart.js.
 - Displays a bar chart showing total spending per month.
 - Data is dynamically retrieved from the database and grouped by month.
 
 #### **Endpoint**
+
 - `/Expense/MonthlySpending`: View the monthly spending chart.
 
 ---
@@ -52,14 +57,16 @@ This project is an ASP.NET Core application that includes the following features
 ## **Installation**
 
 ### **Prerequisites**
+
 - .NET 6.0 SDK or later
 - PostgreSQL (or another compatible database)
 - A web browser
 
 ### **Steps to Run the Application**
+
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
+   git clone [https://github.com/AvaniVaidya/Expense-Tracker-DOT-NET.git]
    cd <project_directory>
    ```
 2. Configure the database connection:
@@ -85,10 +92,12 @@ This project is an ASP.NET Core application that includes the following features
 ## **Project Structure**
 
 ### **Controllers**
+
 - **AccountController**: Handles user registration, login, and logout.
 - **ExpenseController**: Manages CRUD operations and the monthly spending graph.
 
 ### **Views**
+
 - **Account**:
   - `Register.cshtml`: User registration form.
   - `Login.cshtml`: User login form.
@@ -99,11 +108,13 @@ This project is an ASP.NET Core application that includes the following features
   - `MonthlySpending.cshtml`: Displays the monthly spending chart.
 
 ### **Models**
+
 - **Expense**: Represents an expense with properties like `Category`, `Amount`, `Date`, and `Description`.
 
 ---
 
 ## **Technologies Used**
+
 - **ASP.NET Core 6.0**: For web application development.
 - **Entity Framework Core**: For database interaction.
 - **Chart.js**: For data visualization.
@@ -113,6 +124,7 @@ This project is an ASP.NET Core application that includes the following features
 ---
 
 ## **Future Enhancements**
+
 - Role-based access control (e.g., admin and user roles).
 - Enhanced data visualization (e.g., pie charts for category spending).
 - Exporting data to CSV or PDF.
@@ -121,6 +133,7 @@ This project is an ASP.NET Core application that includes the following features
 ---
 
 ## **Troubleshooting**
+
 - **Database Issues**: Ensure the database server is running and the connection string is correctly configured.
 - **Migration Errors**: Delete existing migrations and recreate them:
   ```bash
@@ -132,9 +145,11 @@ This project is an ASP.NET Core application that includes the following features
 ---
 
 ## **License**
+
 This project is licensed under the [MIT License](LICENSE).
 
 ---
 
 ## **Contributors**
+
 - [Your Name]
